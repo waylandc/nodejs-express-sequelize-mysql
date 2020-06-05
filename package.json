@@ -4,6 +4,7 @@
   "description": "Node.js Rest Apis with Express, Sequelize & MySQL",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -22,5 +23,8 @@
     "express": "^4.17.1",
     "mysql2": "^2.0.2",
     "sequelize": "^5.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
