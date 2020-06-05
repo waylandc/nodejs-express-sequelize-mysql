@@ -133,6 +133,39 @@ exports.deleteAll = (req, res) => {
     });
 };
 
+exports.login = (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  User.findAll({
+    where: {email: email, password: password}
+  })
+    .then(data => {
+      //Update last login timestamp
+      User.update(req.body, {
+        where: { email: email, password: password}
+      })
+      .then(num => {
+        if (num == 1) {
+          // After successful update, send data back to client
+          res.send(data);
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: 'Error updating user lastLogin'
+        });
+      });
+
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error logging in User with email=" + email
+      });
+    });
+}
+
+
 // find all published User
 // exports.findAllPublished = (req, res) => {
 //   User.findAll({ where: { published: true } })
