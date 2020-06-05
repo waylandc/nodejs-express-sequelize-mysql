@@ -149,6 +149,10 @@ exports.login = (req, res) => {
         if (num == 1) {
           // After successful update, send data back to client
           res.send(data);
+        } else {
+          res.status(500).send({
+            message: 'Error updating user lastLogin'
+          });
         }
       })
       .catch(err => {
